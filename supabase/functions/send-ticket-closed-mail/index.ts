@@ -12,10 +12,13 @@ serve(async (req) => {
   }
 
   try {
-    const { email, title, comment } = await req.json()
+    const { email, title } = await req.json()
 
-    if (!email || !comment) {
-      return new Response("Missing fields", { status: 400, headers: corsHeaders })
+    if (!email || !title) {
+      return new Response("Missing fields", {
+        status: 400,
+        headers: corsHeaders,
+      })
     }
 
     const token = Deno.env.get("POSTMARK_API_TOKEN")
@@ -30,19 +33,17 @@ serve(async (req) => {
       body: JSON.stringify({
         From: from,
         To: email,
-        Subject: `Uppdatering i ditt ärende: ${title}`,
+        Subject: `Ditt ärende är avslutat: ${title}`,
         TextBody: `
 Hej!
 
-Vi har gjort en uppdatering i ditt ärende "${title}":
+Vi har nu åtgärdat och avslutat ditt ärende:
 
----------------------------------
-${comment}
----------------------------------
+"${title}"
 
-Om du har frågor eller information att lägga till, svara gärna på detta mail.
+Om problemet kvarstår eller om du har fler frågor är du varmt välkommen att kontakta oss igen.
 
-Vänliga hälsningar
+Vänliga hälsningar  
 Fastighetsförvaltningen
         `.trim(),
       }),
