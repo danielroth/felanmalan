@@ -14,6 +14,11 @@ export default function TicketList({
 
   return (
     <div className="space-y-8">
+      <Section title="Nya ärenden" tickets={newTickets} />
+      <Section title="Hög prioritet" tickets={highPriority} />
+      <Section title="Normal prioritet" tickets={normalPriority} />
+      <Section title="Låg prioritet" tickets={lowPriority} />
+
       <button
         onClick={() => setShowDone(v => !v)}
         className="underline text-sm"
@@ -22,11 +27,6 @@ export default function TicketList({
           ? 'Dölj avslutade ärenden'
           : 'Visa avslutade ärenden'}
       </button>
-
-      <Section title="Nya ärenden" tickets={newTickets} />
-      <Section title="Hög prioritet" tickets={highPriority} />
-      <Section title="Normal prioritet" tickets={normalPriority} />
-      <Section title="Låg prioritet" tickets={lowPriority} />
 
       {showDone && (
         <Section
