@@ -1,5 +1,7 @@
 import { createClient } from '@/lib/supabase-server'
 import Link from 'next/link'
+import "../globals.css";
+
 
 export default async function InternalLayout({
   children,

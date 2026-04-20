@@ -6,7 +6,12 @@ export default async function TicketsPage() {
 
   const { data: tickets } = await supabase
     .from('tickets')
-    .select('id, title, address, status, priority, created_at')
+    .select('id, title, address, status, priority, created_at, description, phone, email, call_first, key_access')
+    .order('created_at', { ascending: true })
+
+  const { data: comments } = await supabase
+    .from('ticket_comments')
+    .select('id, created_at, body, is_internal, author_type, ticket_id')
     .order('created_at', { ascending: true })
 
   if (!tickets) {
@@ -33,6 +38,7 @@ export default async function TicketsPage() {
       normalPriority={normalPriority}
       lowPriority={lowPriority}
       doneTickets={doneTickets}
+      comments={comments ?? []}
     />
   )
 }
