@@ -9,6 +9,7 @@ type Ticket = {
   title: string
   description: string
   address: string
+  name: string
   phone: string
   email: string
   call_first: boolean
