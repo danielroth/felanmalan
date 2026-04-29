@@ -6,7 +6,7 @@ export default async function TicketsPage() {
 
   const { data: tickets } = await supabase
     .from('tickets')
-    .select('id, title, address, status, priority, created_at, description, phone, email, call_first, key_access')
+    .select('id, title, address, status, priority, created_at, description, phone, email, name, call_first, key_access')
     .order('created_at', { ascending: true })
 
   const { data: comments } = await supabase
@@ -21,13 +21,13 @@ export default async function TicketsPage() {
   // Gruppindelning
   const newTickets = tickets.filter(t => t.status === 'new')
   const highPriority = tickets.filter(
-    t => t.status !== 'done' && t.priority === 'high'
+    t => t.status !== 'new' && t.status !== 'done' && t.priority === 'high'
   )
   const normalPriority = tickets.filter(
-    t => t.status !== 'done' && t.priority === 'normal'
+    t => t.status !== 'new' && t.status !== 'done' && t.priority === 'normal'
   )
   const lowPriority = tickets.filter(
-    t => t.status !== 'done' && t.priority === 'low'
+    t => t.status !== 'new' && t.status !== 'done' && t.priority === 'low'
   )
   const doneTickets = tickets.filter(t => t.status === 'done')
 

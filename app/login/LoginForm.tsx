@@ -30,8 +30,12 @@ export default function LoginForm() {
       return
     }
 
-    // ✅ lyckad inloggning
-    router.push('/internal/tickets')
+
+    // ✅ Tvinga cookie-sync
+    router.refresh()
+
+    // ✅ Gå till internvy
+    router.replace('/internal/tickets')
   }
 
   return (

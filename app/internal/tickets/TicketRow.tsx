@@ -15,12 +15,17 @@ export default function TicketRow({
   comments: any[]
 }) {
   return (
-    <div className="border rounded bg-white">
+    <div className="ticketRow border rounded bg-white">
       {/* HEADER */}
       <button
         type="button"
-        onClick={() => onToggle(ticket.id)}
-        className="w-full text-left px-4 py-3 flex gap-4 items-start hover:bg-gray-50"
+        tabIndex={-1}
+        onClick={(e) => {
+          e.preventDefault()
+          onToggle(ticket.id)
+          // e.currentTarget.parentNode.classList.toggle("expanded")
+        }}
+        className="w-full text-left px-4 py-3 flex gap-4 items-start focus:outline-none"
       >
         {/* BADGES */}
         {/* <div className="flex flex-col gap-1 min-w-[64px]">
@@ -37,7 +42,7 @@ export default function TicketRow({
         {/* CONTENT */}
         <div className="flex-1">
           <div className="font-medium">{ticket.title}</div>
-          <div className="text-sm opacity-70">{ticket.address}</div>
+          <div className="text-sm opacity-70">{ticket.name}, {ticket.address}</div>
           <div className="text-xs opacity-50 mt-1">
             Skapad{' '}
             {new Date(ticket.created_at).toLocaleString('sv-SE')}
@@ -50,15 +55,14 @@ export default function TicketRow({
         </div>
       </button>
 
-      {/* EXPANDED */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          expanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <TicketExpanded ticket={ticket} comments={comments} />
 
-        <div className="px-4 pb-4">
+      {/* EXPANDED */}
+      <div className={`grid transition-all duration-300 ease-in-out ${expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+        <div className="overflow-hidden">
+          <TicketExpanded ticket={ticket} comments={comments} />
+        </div>
+
+        {/* <div className="px-4 pb-4">
           <button
             onClick={(e) => {
               e.preventDefault()
@@ -69,7 +73,7 @@ export default function TicketRow({
           >
             Markera klar
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -28,3 +28,12 @@ body {
 button {
   cursor: pointer;
 }
+
+
+.ticketRow:hover {
+  background-color: var(--color-gray-50);
+}
+
+.expanded .hidden {
+  display: block !important;
+}

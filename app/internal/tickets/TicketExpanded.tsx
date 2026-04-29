@@ -31,6 +31,15 @@ type Props = {
 }
 
 export function TicketExpanded({ ticket, comments }: Props) {
+  let keyAccessText = ""
+
+  if (ticket.key_access === "yes") {
+    keyAccessText = "Ja"
+  } else if (ticket.key_access === "no") {
+    keyAccessText = "Nej"
+  } else {
+    keyAccessText = "Inte nödvändigt"
+  }
 
   return (
     <div className="border-t bg-gray-50 px-4 py-4 space-y-4">
@@ -43,6 +52,7 @@ export function TicketExpanded({ ticket, comments }: Props) {
       {/* KONTAKT */}
       <section>
         <h4 className="text-sm font-semibold mb-2">Kontakt</h4>
+        <p className="text-sm">Namn: {ticket.name}</p>
         <p className="text-sm">Telefon: {ticket.phone}</p>
         <p className="text-sm">E‑post: {ticket.email}</p>
         <p className="text-sm">Ring först: {ticket.call_first ? 'Ja' : 'Nej'}</p>
@@ -50,7 +60,7 @@ export function TicketExpanded({ ticket, comments }: Props) {
 
       {/* PLATS */}
       <section>
-        <p className="text-sm">Nyckelåtkomst: <b>{ticket.key_access}</b></p>
+        <p className="text-sm">Nyckelåtkomst: <b>{keyAccessText}</b></p>
       </section>
 
       

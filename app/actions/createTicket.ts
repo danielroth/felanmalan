@@ -20,6 +20,7 @@ export async function createTicket(data: CreateTicketInput) {
     title: data.title,
     description: data.description,
     address: data.address,
+    name: data.name,
     email: data.email,
     phone: data.phone || null,
     call_first: data.callFirst,
