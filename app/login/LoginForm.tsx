@@ -30,7 +30,6 @@ export default function LoginForm() {
       return
     }
 
-
     // ✅ Tvinga cookie-sync
     router.refresh()
 
@@ -49,6 +48,8 @@ export default function LoginForm() {
         <label className="block text-sm mb-1">E‑post</label>
         <input
           type="email"
+          name="email"
+          autoComplete="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -60,6 +61,8 @@ export default function LoginForm() {
         <label className="block text-sm mb-1">Lösenord</label>
         <input
           type="password"
+          name="password"
+          autoComplete="current-password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
